@@ -49,10 +49,11 @@ class Polylang_Theme_Translation
         $themes = wp_get_themes();
         if (!empty($themes)) {
             foreach ($themes as $name => $theme) {
-                $theme_path = $theme->theme_root . DIRECTORY_SEPARATOR . $name;
+                $name = explode('/', $name);
+                $theme_path = $theme->theme_root . DIRECTORY_SEPARATOR . $name[0];
                 $files = $this->get_files_from_dir($theme_path);
                 $strings = $this->file_scanner($files);
-                $this->add_to_polylang_register($strings, $name);
+                $this->add_to_polylang_register($strings, $name[0]);
             }
         }
     }
